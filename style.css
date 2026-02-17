@@ -1,25 +1,19 @@
 /* VARIABLES GLOBALES */
-/* Définit les couleurs et effets utilisés partout sur le site */
 :root {
     --fond-page: #0f172a;      
     --fond-carte: #1e293b;      
     --fond-sombre: #020617;      
-    
     --primaire: #38bdf8;       
     --secondaire: #6366f1;    
-    
     --texte-principal: #f1f5f9; 
     --texte-gris: #94a3b8;    
-    
     --transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
     --ombre-nav: 0 10px 30px -10px rgba(2, 6, 23, 0.7);
     --ombre-carte: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
     --lueur: 0 0 20px rgba(56, 189, 248, 0.3);
 }
 
-
 /* RESET & BASES */
-/* Enlève les marges par défaut sur tous les éléments */
 * {
     margin: 0;
     padding: 0;
@@ -27,61 +21,31 @@
     scroll-behavior: smooth; 
 }
 
-
-/* Personnalisation de la barre de défilement (largeur) */
 ::-webkit-scrollbar { width: 10px; }
-
-
-/* Fond de la barre de défilement */
 ::-webkit-scrollbar-track { background: var(--fond-page); }
-
-
-/* Partie mobile de la barre de défilement */
 ::-webkit-scrollbar-thumb { background: var(--fond-carte); border-radius: 5px; border: 2px solid var(--fond-page); }
-
-
-/* Changement de couleur au survol de la barre */
 ::-webkit-scrollbar-thumb:hover { background: var(--primaire); }
 
-
-/* Styles généraux de la page (police, couleur de fond) */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--texte-principal);
     background-color: var(--fond-page);
-    overflow-x: hidden;
+    overflow-x: hidden; /* Empêche le scroll horizontal indésirable */
+    width: 100%;
 }
 
-
-/* Styles par défaut des liens */
 a { text-decoration: none; color: inherit; transition: var(--transition); }
-
-
-/* Enlève les puces des listes */
 ul { list-style: none; }
 
-
-
 /* UTILITAIRES */
-/* Centre le contenu et limite la largeur max */
 .conteneur { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-
-/* Espacement standard pour chaque section */
 .section { padding: 100px 0; overflow: hidden; }
-
-/* Fond plus sombre pour certaines sections */
 .fond-sombre { background-color: var(--fond-sombre); }
-
-/* Fond dégradé pour la section CV */
 .fond-degrade { background: linear-gradient(135deg, var(--fond-carte) 0%, var(--fond-page) 100%); }
-
-/* Aligne le texte au centre */
 .texte-centre { text-align: center; }
 
-
 /* TITRES */
-/* Style des grands titres de section avec dégradé de texte */
 .titre-section {
     text-align: center;
     font-size: 2.5rem;
@@ -92,12 +56,13 @@ ul { list-style: none; }
     text-transform: uppercase;
     letter-spacing: 2px;
     position: relative;
+    /* Centrage par défaut pour PC */
     display: inline-block;
     left: 50%;
     transform: translateX(-50%);
+    white-space: nowrap; /* Empêche le retour à la ligne sur PC */
 }
 
-/* Ligne décorative sous le titre */
 .titre-section::after {
     content: '';
     position: absolute;
@@ -109,12 +74,9 @@ ul { list-style: none; }
     transition: 0.5s ease;
 }
 
-/* Animation de la ligne au survol de la section */
 .section:hover .titre-section::after { width: 100%; }
 
-
-/*  BOUTONS */
-/* Style de base commun à tous les boutons */
+/* BOUTONS */
 .bouton {
     display: inline-block;
     padding: 12px 35px;
@@ -128,180 +90,103 @@ ul { list-style: none; }
     z-index: 1;
 }
 
-/* Bouton principal (dégradé bleu) */
 .bouton-primaire { 
     background: linear-gradient(90deg, var(--primaire), var(--secondaire)); 
     color: var(--fond-sombre);
     box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
 }
+.bouton-primaire:hover { transform: translateY(-3px); box-shadow: 0 0 25px rgba(56, 189, 248, 0.6); }
 
-/* Effet au survol du bouton principal */
-.bouton-primaire:hover { 
-    transform: translateY(-3px); 
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.6); 
-}
-
-/* Bouton secondaire (contour seulement) */
 .bouton-secondaire { 
     background: transparent; 
     border: 2px solid var(--primaire); 
     color: var(--primaire); 
     margin-left: 10px; 
 }
+.bouton-secondaire:hover { background: rgba(56, 189, 248, 0.1); transform: translateY(-3px);}
 
-/* Effet au survol du bouton secondaire */
-.bouton-secondaire:hover { 
-    background: rgba(56, 189, 248, 0.1); 
-    transform: translateY(-3px);
-}
-
-/* Bouton blanc pour la section CV */
 .bouton-blanc { background: var(--texte-principal); color: var(--fond-page); margin-top: 20px; font-weight: bold; }
 .bouton-blanc:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(255,255,255,0.4); }
 
-
-/*  NAVIGATION  */
-/* Barre de navigation fixe en haut */
+/* NAVIGATION */
 .barre-nav {
-    position: fixed;
-    top: 0; width: 100%;
+    position: fixed; top: 0; width: 100%;
     background: rgba(15, 23, 42, 0.85);
     backdrop-filter: blur(10px);
     box-shadow: var(--ombre-nav);
-    z-index: 1000;
-    height: 80px;
+    z-index: 1000; height: 80px;
     display: flex; align-items: center;
     transition: var(--transition);
 }
 
-/* Disposition flexible du contenu de la nav */
 .contenu-nav { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-
-/* Style du logo */
 .logo { font-size: 1.8rem; font-weight: 700; color: var(--texte-principal); }
-
-/* Couleur pour mettre en valeur une partie du texte */
 .surbrillance { color: var(--primaire); }
-
-/* Liste des liens de navigation */
 .liens-nav { display: flex; gap: 40px; }
+.liens-nav a.lien-menu { font-weight: 500; color: var(--texte-gris); position: relative; }
 
-/* Style individuel des liens du menu */
-.liens-nav a.lien-menu { 
-    font-weight: 500; 
-    color: var(--texte-gris);
-    position: relative;
-}
-
-/* Petite ligne sous les liens (animation) */
 .liens-nav a.lien-menu::before {
-    content: '';
-    position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
+    content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 2px;
     background: var(--primaire); transition: 0.3s;
 }
-
-/* Effet au survol des liens du menu */
 .liens-nav a.lien-menu:hover { color: var(--primaire); }
 .liens-nav a.lien-menu:hover::before { width: 100%; }
 
-/* Bouton spécial "Contact" dans le menu */
 .bouton-contact {
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--primaire) !important;
-    padding: 8px 25px;
-    border: 1px solid var(--primaire);
-    border-radius: 20px;
+    background: rgba(56, 189, 248, 0.1); color: var(--primaire) !important;
+    padding: 8px 25px; border: 1px solid var(--primaire); border-radius: 20px;
 }
 .bouton-contact:hover { background: var(--primaire); color: var(--fond-sombre) !important; }
-
-/* Menu burger (caché sur PC) */
 .menu-burger { display: none; cursor: pointer; font-size: 1.5rem; color: var(--texte-principal); }
 
-
-/* SECTION ACCUEIL (HERO) */
-/* Bannière plein écran */
+/* SECTION ACCUEIL */
 .banniere {
     height: 100vh;
     display: flex; flex-direction: column;
     align-items: center; justify-content: center;
     text-align: center;
     background: radial-gradient(circle at top right, #1e293b 0%, var(--fond-page) 60%);
-    position: relative;
+    position: relative; padding: 0 20px;
 }
 
-/* Petit sous-titre "Bonjour je suis" */
 .sous-titre { color: var(--primaire); font-weight: 600; letter-spacing: 2px; margin-bottom: 10px; display: block;}
-
-/* Grand titre (Nom Prénom) */
 .banniere h1 { font-size: 4.5rem; margin: 10px 0; background: linear-gradient(to right, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-
-/* Titre secondaire (Statut) */
 .banniere h2 { font-size: 1.8rem; color: var(--texte-gris); font-weight: 400; margin-bottom: 40px; }
-
-/* Effet souligné pour le texte important */
 .texte-dactylo { color: var(--primaire); border-bottom: 2px solid var(--primaire); }
 
-
 /* INDICATEUR DE SCROLL */
-/* Positionne l'indicateur en bas de l'écran */
 .scrollez-bas {
     position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; color: var(--texte-gris);
     font-size: 0.8rem; opacity: 0.7;
 }
-
-/* Forme de la souris */
 .souris {
     width: 25px; height: 45px; border: 2px solid var(--texte-gris);
     border-radius: 20px; margin-bottom: 5px; position: relative;
 }
-
-/* Petite roue qui bouge à l'intérieur */
 .roulette {
     width: 3px; height: 3px; background: var(--primaire); border-radius: 50%;
     position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
     animation: defilementRoulette 1.5s infinite;
 }
-
-
-/* Animation de la roulette */
 @keyframes defilementRoulette { 0% { top: 8px; opacity: 1; } 100% { top: 25px; opacity: 0; } }
 
-
 /* SECTION A PROPOS */
-/* Grille pour aligner texte et image */
 .grille-a-propos { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
-
-/* Titre des compétences */
 .competences h3 { color: var(--texte-principal); margin: 20px 0 15px; }
-
-/* Conteneur des tags de compétences */
 .liste-tags { display: flex; flex-wrap: wrap; gap: 10px; }
-
-/* Style individuel d'un tag (ex: HTML) */
 .tag-competence {
     background: rgba(30, 41, 59, 0.5);
     border: 1px solid rgba(56, 189, 248, 0.2);
-    color: var(--texte-gris);
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    cursor: default;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    color: var(--texte-gris); padding: 8px 18px; border-radius: 8px;
+    font-size: 0.95rem; cursor: default; transition: all 0.3s ease;
+    position: relative; overflow: hidden;
 }
-
-/* Effet au survol d'un tag */
 .tag-competence:hover {
-    background: rgba(56, 189, 248, 0.15);
-    color: var(--primaire);
-    transform: translateY(-5px) scale(1.05);
-    border-color: var(--primaire);
+    background: rgba(56, 189, 248, 0.15); color: var(--primaire);
+    transform: translateY(-5px) scale(1.05); border-color: var(--primaire);
     box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
 }
-
-/* Cadre pour l'image ou l'icône à droite */
 .cadre-image {
     height: 350px;
     background: linear-gradient(135deg, var(--fond-carte), var(--fond-page));
@@ -309,162 +194,84 @@ ul { list-style: none; }
     display: flex; align-items: center; justify-content: center;
     font-size: 6rem; color: var(--primaire);
     border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: var(--ombre-carte);
-    position: relative;
+    box-shadow: var(--ombre-carte); position: relative;
 }
-
-/* Animation flottante pour l'icône */
 .icone-flottante { animation: flottement 6s ease-in-out infinite; }
-
-/* Définition de l'animation flottante */
 @keyframes flottement { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-
-/* SECTION FORMATION (TIMELINE) */
-/* Conteneur principal de la chronologie */
+/* SECTION FORMATION */
 .chronologie { position: relative; max-width: 800px; margin: 0 auto; }
-
-/* Ligne verticale centrale */
 .chronologie::after {
     content: ''; position: absolute; width: 2px;
-    background: rgba(255,255,255,0.1);
-    top: 0; bottom: 0; left: 50%; margin-left: -1px;
+    background: rgba(255,255,255,0.1); top: 0; bottom: 0; left: 50%; margin-left: -1px;
 }
-
-/* Élément individuel de la timeline */
 .element-chrono { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; }
-
-/* Positionnement alterné gauche/droite */
 .element-chrono:nth-child(odd) { left: 0; text-align: right; }
 .element-chrono:nth-child(even) { left: 50%; }
-
-/* Point sur la ligne centrale */
 .point-chrono {
     position: absolute; width: 16px; height: 16px;
     background: var(--fond-page); border: 3px solid var(--primaire);
-    border-radius: 50%; top: 20px; z-index: 10;
-    transition: var(--transition);
+    border-radius: 50%; top: 20px; z-index: 10; transition: var(--transition);
 }
-
-/* Ajustement position des points */
 .element-chrono:nth-child(odd) .point-chrono { right: -8px; }
 .element-chrono:nth-child(even) .point-chrono { left: -8px; }
-
-/* Boîte de contenu (texte) de la timeline */
 .contenu-chrono {
-    padding: 25px;
-    background: var(--fond-carte);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.05);
-    box-shadow: var(--ombre-carte);
-    transition: var(--transition);
+    padding: 25px; background: var(--fond-carte);
+    border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: var(--ombre-carte); transition: var(--transition);
 }
-
-/* Date en couleur */
 .date-chrono { color: var(--primaire); font-weight: bold; margin-bottom: 8px; font-size: 0.9rem; }
 .contenu-chrono h3 { font-size: 1.3rem; margin-bottom: 5px; }
 .ecole { color: var(--texte-gris); font-style: italic; margin-bottom: 10px; }
-
-/* Effet au survol d'un élément de la timeline */
-.element-chrono:hover .point-chrono {
-    background: var(--primaire);
-    box-shadow: 0 0 15px var(--primaire);
-    transform: scale(1.3);
-}
-
-/* Effet de déplacement de la boîte au survol */
-.element-chrono:hover .contenu-chrono {
-    transform: translateY(-5px);
-    border-color: var(--primaire);
-    box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15);
-}
-.element-chrono:nth-child(odd):hover .contenu-chrono { transform: translateX(-10px); }
-.element-chrono:nth-child(even):hover .contenu-chrono { transform: translateX(10px); }
-
+.element-chrono:hover .point-chrono { background: var(--primaire); box-shadow: 0 0 15px var(--primaire); transform: scale(1.3); }
+.element-chrono:hover .contenu-chrono { transform: translateY(-5px); border-color: var(--primaire); box-shadow: 0 10px 25px rgba(56, 189, 248, 0.15); }
 
 /* SECTION PROJETS */
-/* Grille responsive pour les cartes projets */
-.grille-projets { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+/* MODIFICATION ICI : 280px pour être sûr que ça passe sur petit mobile */
+.grille-projets { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 
-/* Carte individuelle de projet */
 .carte-projet {
-    background: var(--fond-carte);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: var(--ombre-carte);
-    transition: var(--transition);
-    border: 1px solid rgba(255,255,255,0.05);
-    position: relative;
+    background: var(--fond-carte); border-radius: 15px;
+    overflow: hidden; box-shadow: var(--ombre-carte);
+    transition: var(--transition); border: 1px solid rgba(255,255,255,0.05); position: relative;
 }
-
-/* Effet au survol de la carte */
 .carte-projet:hover { 
-    transform: translateY(-15px); 
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
+    transform: translateY(-15px); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.6);
     border-color: rgba(56, 189, 248, 0.3);
 }
-
-/* Partie haute de la carte (image/icône) */
 .entete-projet {
-    height: 180px;
-    background: #273549;
+    height: 180px; background: #273549;
     display: flex; align-items: center; justify-content: center;
     font-size: 3.5rem; color: var(--texte-gris);
     position: relative; overflow: hidden;
 }
-
-/* Animation de l'icône projet */
 .entete-projet i { z-index: 2; transition: var(--transition); }
 .carte-projet:hover .entete-projet i { transform: scale(1.1); color: var(--texte-principal); }
-
-/* Voile de couleur par-dessus l'entête */
 .entete-projet .superposition {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(45deg, var(--primaire), var(--secondaire));
     opacity: 0; transition: var(--transition); z-index: 1;
 }
 .carte-projet:hover .entete-projet .superposition { opacity: 0.1; }
-
-/* Corps de la carte (texte) */
 .corps-projet { padding: 30px; }
 .corps-projet h3 { margin-bottom: 10px; color: var(--texte-principal); }
 .corps-projet p { color: var(--texte-gris); font-size: 0.95rem; }
-
-/* Liste des technos utilisées */
 .technologies { margin: 20px 0; display: flex; gap: 10px; flex-wrap: wrap; }
 .technologies small {
-    color: var(--primaire);
-    background: rgba(56, 189, 248, 0.1);
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    color: var(--primaire); background: rgba(56, 189, 248, 0.1);
+    padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
 }
 
-/* Lien "Voir le projet" */
-.bouton-lien { color: var(--texte-principal); font-weight: 600; display: inline-flex; align-items: center; gap: 8px; margin-top: 10px; }
-.bouton-lien:hover { color: var(--primaire); gap: 12px; }
-
-
 /* SECTION CONTACT */
-/* Grille pour infos et formulaire */
 .conteneur-contact { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; }
-
-/* Élément d'information (email, ville) */
 .item-info { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; }
-
-/* Cercle autour de l'icône info */
 .boite-icone {
     width: 50px; height: 50px; background: var(--fond-carte);
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
     color: var(--primaire); font-size: 1.2rem;
     box-shadow: var(--ombre-carte); transition: var(--transition);
 }
-
-/* Animation rotation icône info */
 .item-info:hover .boite-icone { background: var(--primaire); color: var(--fond-page); transform: rotate(360deg); }
-
-/* Boutons réseaux sociaux */
 .liens-sociaux a {
     display: inline-block; width: 45px; height: 45px;
     background: var(--fond-carte); color: var(--texte-gris);
@@ -472,54 +279,37 @@ ul { list-style: none; }
     margin-right: 15px; transition: var(--transition); border: 1px solid rgba(255,255,255,0.05);
 }
 .liens-sociaux a:hover { background: var(--primaire); color: var(--fond-page); transform: translateY(-5px); }
-
-/* Groupe d'un champ de formulaire */
 .groupe-saisie { position: relative; margin-bottom: 30px; }
-
-/* Style des champs input et textarea */
 .formulaire-contact input, .formulaire-contact textarea {
     width: 100%; padding: 15px;
     background: var(--fond-carte); border: 1px solid rgba(255,255,255,0.1);
     border-radius: 8px; color: var(--texte-principal); font-family: inherit; font-size: 1rem;
     transition: var(--transition);
 }
-
-/* Style du label (texte au dessus du champ) */
 .formulaire-contact label {
     position: absolute; left: 15px; top: 15px; color: var(--texte-gris);
     pointer-events: none; transition: 0.3s ease; font-size: 1rem;
 }
-
-/* Effets quand on clique dans le champ */
 .formulaire-contact input:focus, .formulaire-contact textarea:focus,
 .formulaire-contact input:valid, .formulaire-contact textarea:valid {
     border-color: var(--primaire); background: #233044;
 }
-
-/* Déplacement du label quand le champ est rempli */
 .formulaire-contact input:focus ~ label, .formulaire-contact textarea:focus ~ label,
 .formulaire-contact input:valid ~ label, .formulaire-contact textarea:valid ~ label {
     top: -22px; left: 0; color: var(--primaire); font-size: 0.85rem; font-weight: bold;
 }
 
-
 /* PIED DE PAGE */
 footer { background: #020617; color: var(--texte-gris); text-align: center; padding: 40px 20px; border-top: 1px solid rgba(255,255,255,0.05); }
 
-
-/* ANIMATIONS & EFFETS */
-/* Animation d'apparition vers le haut */
+/* ANIMATIONS */
 .apparition-haut { opacity: 0; transform: translateY(30px); animation: apparitionHaut 0.8s forwards; }
 @keyframes apparitionHaut { to { opacity: 1; transform: translateY(0); } }
-
-/* Délais d'animation pour effet cascade */
 .delai-1 { animation-delay: 0.2s; }
 .delai-2 { animation-delay: 0.4s; }
 .delai-3 { animation-delay: 0.6s; }
 .delai-4 { animation-delay: 0.8s; }
 .delai-5 { animation-delay: 1s; }
-
-/* Classes pour les éléments révélés au scroll */
 .revelation-texte, .revelation-haut, .revelation-gauche, .revelation-droite, .revelation-item {
     opacity: 0; transition: all 0.8s ease-out;
 }
@@ -528,12 +318,8 @@ footer { background: #020617; color: var(--texte-gris); text-align: center; padd
 .revelation-gauche { transform: translateX(-50px); }
 .revelation-droite { transform: translateX(50px); }
 .revelation-item { transform: translateY(30px); }
-
-/* États actifs des animations (quand visible) */
 .active.revelation-texte, .active.revelation-haut, .active.revelation-item { opacity: 1; transform: translateY(0); }
 .active.revelation-gauche, .active.revelation-droite { opacity: 1; transform: translateX(0); }
-
-/* Animation de pulsation (pour le bouton CV) */
 .animation-pulsation { animation: pulsation 2s infinite; }
 @keyframes pulsation {
     0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
@@ -541,34 +327,53 @@ footer { background: #020617; color: var(--texte-gris); text-align: center; padd
     100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
 
-/* VERSION MOBILE */
-/* Adaptations pour écrans de taille tablette et mobile */
+/* =========================================
+   VERSION MOBILE (CORRECTIVE)
+   ========================================= */
 @media (max-width: 768px) {
-    /* Menu navigation vertical sur mobile */
+    
+    /* 1. CORRECTION DES TITRES COUPÉS */
+    .titre-section {
+        font-size: 2rem; /* Texte plus petit */
+        width: 100%;     /* Pleine largeur */
+        left: 0;         /* Annulation du centrage PC */
+        transform: none; /* Annulation du décalage */
+        display: block;  /* Bloc standard */
+        white-space: normal; /* Autorise le retour à la ligne si besoin */
+        margin-bottom: 40px;
+    }
+
+    /* 2. CORRECTION DE LA NAVIGATION */
     .liens-nav {
         background: rgba(15, 23, 42, 0.98);
         position: absolute; top: 80px; right: 0; width: 100%; height: 0;
         overflow: hidden; flex-direction: column; gap: 0;
         transition: height 0.4s ease;
     }
-    
-    /* Menu ouvert */
     .liens-nav.active { height: 350px; padding: 20px 0; border-bottom: 1px solid var(--primaire); }
     .liens-nav li { width: 100%; text-align: center; padding: 15px 0; }
-    
-    /* Afficher le bouton burger */
     .menu-burger { display: block; }
     
-    /* Ajustements de taille de texte */
-    .banniere h1 { font-size: 2.8rem; }
-    
-    /* Passer les grilles en une seule colonne */
+    /* 3. CORRECTION DE LA BANNIÈRE (TROP GRANDE) */
+    .banniere h1 { font-size: 2.5rem; line-height: 1.2; } /* Réduction drastique pour mobile */
+    .banniere h2 { font-size: 1.2rem; }
+    .boutons-banniere { display: flex; flex-direction: column; gap: 15px; width: 100%; padding: 0 20px;}
+    .bouton { width: 100%; margin: 0; text-align: center; }
+
+    /* 4. CORRECTION GRILLES & PADDING */
     .grille-a-propos, .conteneur-contact { grid-template-columns: 1fr; }
+    .cadre-image { display: none; } /* On cache l'image décorative sur mobile pour gagner de la place */
     
-    /* Ajustements timeline mobile */
+    /* Force les projets en 1 seule colonne */
+    .grille-projets { grid-template-columns: 1fr; }
+    
+    /* 5. CORRECTION TIMELINE */
     .chronologie::after { left: 31px; }
-    .element-chrono { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+    .element-chrono { width: 100%; padding-left: 70px; padding-right: 15px; text-align: left !important; }
     .element-chrono:nth-child(even) { left: 0; }
     .element-chrono:nth-child(odd) .point-chrono, .element-chrono:nth-child(even) .point-chrono { left: 22px; right: auto; }
-    .element-chrono:hover .contenu-chrono { transform: translateX(5px) !important; }
+    
+    /* 6. CORRECTION GÉNÉRALE */
+    .section { padding: 60px 0; } /* Moins d'espace vide entre les sections */
+    .conteneur { padding: 0 20px; overflow: visible; }
 }
